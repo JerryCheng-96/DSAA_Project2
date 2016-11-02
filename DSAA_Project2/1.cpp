@@ -9,14 +9,15 @@ class TextFile
 {
 public:
 	string content;
-	int freqTable[128];
+	int freqList[128] = { 0 };
+	long int fileSize;
 
 	TextFile() {}
 
 	TextFile(const char* fileName)
 	{
 		FILE* fp = fopen(fileName, "r");
-		long int fileSize = 0;
+		fileSize = 0;
 		char* contentChr = { '\0' };
 		
 		//Getting length
@@ -32,6 +33,14 @@ public:
 		fclose(fp);
 	}
 
+	void genFreqList()
+	{
+		for (int i = 0; i < content.length(); i++)
+		{
+			freqList[content.c_str()[i]]++;
+		}
+	}
+
 private:
 
 };
@@ -39,4 +48,5 @@ private:
 void main()
 {
 	TextFile* tf = new TextFile("Salt.txt");
+	tf->genFreqList();
 }
