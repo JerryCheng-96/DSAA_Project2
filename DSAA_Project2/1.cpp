@@ -25,20 +25,44 @@ public:
 		fileSize = ftell(fp);
 		rewind(fp);
 
-		contentChr = (char*)malloc(fileSize + 10);
-		fgets(contentChr, fileSize, fp);
+		contentChr = (char*)malloc(fileSize + 1);
+		fgets(contentChr, fileSize + 1, fp);
 		contentChr[fileSize] = '\0';
 		content = contentChr;
-
+		free(contentChr);
+		contentChr = NULL;
 		fclose(fp);
 	}
 
 	void genFreqList()
 	{
+		//Initializing
+		for (int j = 0; j < 128; j++)
+		{
+			freqList[j] = 0;
+		}
+
 		for (int i = 0; i < content.length(); i++)
 		{
 			freqList[content.c_str()[i]]++;
 		}
+	}
+
+	void toUpperCase() 
+	{
+		char* contentChr = (char*)malloc((this->fileSize) * sizeof(char) + 1);
+		for (int i = 0; i < content.length(); i++)
+		{
+			if (content.c_str()[i] >= 'a' && content.c_str()[i] <= 'z')
+			{
+				contentChr[i] = content.c_str()[i] - 32;
+				continue;
+			}
+			contentChr[i] = content.c_str()[i];
+		}
+		contentChr[fileSize] = '\0';
+		content.clear();
+		content = contentChr;
 	}
 
 private:
@@ -48,5 +72,7 @@ private:
 void main()
 {
 	TextFile* tf = new TextFile("Salt.txt");
+	tf->genFreqList();
+	tf->toUpperCase();
 	tf->genFreqList();
 }
