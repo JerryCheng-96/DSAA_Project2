@@ -15,8 +15,20 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="1.cpp">
+    <ClInclude Include="htnode.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="huffmantree.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Huffman.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="1.dat" />
+    <None Include="1c.dat" />
   </ItemGroup>
 </Project>
